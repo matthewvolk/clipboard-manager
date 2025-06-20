@@ -1,0 +1,28 @@
+{
+  "name": "clipboard-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/main.js",
+  "packageManager": "pnpm@10.7.0",
+  "scripts": {
+    "lint": "biome check .",
+    "lint:fix": "biome check . --write",
+    "dev": "electron .",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@biomejs/biome": "2.0.0",
+    "@types/electron": "^1.6.12",
+    "@types/node": "^24.0.3",
+    "electron": "^36.5.0",
+    "typescript": "^5.8.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron"
+    ]
+  }
+}
