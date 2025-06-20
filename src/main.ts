@@ -26,7 +26,7 @@ function buildMenu() {
     Menu.buildFromTemplate([
       ...menuItems,
       { type: "separator" },
-      { label: "Quit", role: "quit" },
+      { label: "Quit", role: "quit", accelerator: "CmdOrCtrl+Q" },
     ]),
   );
 }
