@@ -41,7 +41,7 @@ function getTrayIcon() {
         : "tray-icon-dark.png"
       : "tray-icon-dark.png";
 
-  const iconPath = path.join(__dirname, "../assets", iconFile);
+  const iconPath = path.join(__dirname, "assets", iconFile);
   const size = process.platform === "win32" ? 24 : 16;
 
   const icon = nativeImage.createFromPath(iconPath).resize({

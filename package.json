@@ -2,11 +2,14 @@
   "name": "clipboard-manager",
   "version": "1.0.0",
   "packageManager": "pnpm@10.12.1",
+  "main": "dist/main.js",
   "scripts": {
     "lint": "biome check .",
     "lint:fix": "biome check . --write",
-    "dev": "electron .",
-    "build": "tsc"
+    "clean": "rimraf dist",
+    "copy-assets": "cpx \"assets/**/*\" dist/assets",
+    "build": "pnpm run clean && tsc && pnpm run copy-assets",
+    "dev": "concurrently -k -n typescript-build,copy-assets,electronmon -c blue,green,magenta \"tsc -w\" \"cpx -w \\\"assets/**/*\\\" dist/assets\" \"electronmon .\""
   },
   "keywords": [
     "clipboard",
@@ -19,7 +22,11 @@
     "@biomejs/biome": "2.0.0",
     "@types/electron": "^1.6.12",
     "@types/node": "^24.0.3",
+    "concurrently": "^9.1.2",
+    "cpx": "^1.5.0",
     "electron": "^36.5.0",
+    "electronmon": "^2.0.3",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.3"
   },
   "pnpm": {
