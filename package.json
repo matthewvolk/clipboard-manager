@@ -1,8 +1,6 @@
 {
   "name": "clipboard-manager",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/main.js",
   "packageManager": "pnpm@10.12.1",
   "scripts": {
     "lint": "biome check .",
@@ -10,8 +8,12 @@
     "dev": "electron .",
     "build": "tsc"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "clipboard",
+    "history",
+    "electron"
+  ],
+  "author": "Matthew Volk",
   "license": "ISC",
   "devDependencies": {
     "@biomejs/biome": "2.0.0",
