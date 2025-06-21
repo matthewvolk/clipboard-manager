@@ -1,6 +1,6 @@
 {
   "name": "copyback",
-  "version": "0.1.0",
+  "version": "1.0.0-rc",
   "author": "Matthew Volk",
   "license": "ISC",
   "packageManager": "pnpm@10.12.1",
