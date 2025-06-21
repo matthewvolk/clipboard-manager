@@ -9,8 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  build-and-publish:
-    runs-on: ubuntu-latest
+  build-mac:
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -25,6 +25,26 @@ jobs:
       - run: pnpm run build
       - run: |
           pnpm version --no-git-tag-version "1.0.0-rc.${GITHUB_SHA::8}"
-      - run: pnpm exec electron-builder --mac --win --publish always
+      - run: pnpm exec electron-builder --mac --publish always
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-win:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      - run: |
+          pnpm version --no-git-tag-version "1.0.0-rc.${GITHUB_SHA::8}"
+      - run: pnpm exec electron-builder --win --publish always
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
