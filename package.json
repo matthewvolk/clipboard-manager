@@ -44,7 +44,9 @@
     "win": {
       "target": "nsis"
     },
-    "publish": null
+    "publish": {
+      "provider": "github"
+    }
   },
   "pnpm": {
     "onlyBuiltDependencies": [
