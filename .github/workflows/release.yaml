@@ -1,0 +1,67 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run dist:mac
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mac-app
+          path: release/*.dmg
+
+  build-win:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run dist:win
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: win-app
+          path: release/*.exe
+
+  create-github-release:
+    runs-on: ubuntu-latest
+    needs: [build-mac, build-win]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: mac-app
+          path: artifacts/
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: win-app
+          path: artifacts/
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ github.sha }}
+          tag_name: release-${{ github.sha }}
+          files: artifacts/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
