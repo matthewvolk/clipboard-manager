@@ -67,7 +67,7 @@ jobs:
 
       - uses: softprops/action-gh-release@v2
         with:
-          name: Release ${{ github.sha }}
+          name: release-${{ github.sha }}
           tag_name: release-${{ github.sha }}
           files: artifacts/*
         env:
