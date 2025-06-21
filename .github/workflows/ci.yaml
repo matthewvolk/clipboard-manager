@@ -27,5 +27,5 @@ jobs:
         with:
           version: 2.0.0
 
-      - run: pnpm i --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
       - run: biome ci .
